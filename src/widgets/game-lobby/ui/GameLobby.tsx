@@ -1,14 +1,17 @@
-import { LobbyContainer, OpponentInfo, SearchingText, StartButton, Title } from "./styled";
+import { AuthButton, LobbyContainer, OpponentInfo, SearchingText, StartButton, Title, UserInfo } from "./styled";
 import { setGameId, setIsSearching, setOpponentIp } from "@/entities/game/model/slice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
+import { AuthModal } from "@/widgets/auth/ui/AuthModal";
 import { RootState } from "@/app/store";
 import { gameSocket } from "@/shared/api/gameSocket";
-import { useEffect } from "react";
 
 export const GameLobby = () => {
   const dispatch = useDispatch();
   const { isSearching, opponentIp } = useSelector((state: RootState) => state.game);
+  const { user, isAuthenticated } = useSelector((state: RootState) => state.auth);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   useEffect(() => {
     gameSocket.connect();
@@ -31,6 +34,13 @@ export const GameLobby = () => {
   return (
     <LobbyContainer>
       <Title>반응속도 테스트</Title>
+      {isAuthenticated ? (
+        <UserInfo>
+          {user?.username} ({user?.wins}승 / {user?.total_games}게임)
+        </UserInfo>
+      ) : (
+        <AuthButton onClick={() => setIsAuthModalOpen(true)}>로그인</AuthButton>
+      )}
       {!isSearching ? (
         <StartButton onClick={handleStartGame}>게임 시작</StartButton>
       ) : (
@@ -39,6 +49,7 @@ export const GameLobby = () => {
           {opponentIp && <OpponentInfo>{opponentIp}</OpponentInfo>}
         </>
       )}
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </LobbyContainer>
   );
 };

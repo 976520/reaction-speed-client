@@ -38,3 +38,17 @@ export const OpponentInfo = styled.div`
   color: ${({ theme }) => theme.colors.secondary};
   margin-top: ${({ theme }) => theme.spacing.small};
 `;
+
+export const UserInfo = styled.div`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.colors.secondary};
+`;
+
+export const AuthButton = styled.button`
+  padding: ${({ theme }) => theme.spacing.medium};
+  background: ${({ theme }) => theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
