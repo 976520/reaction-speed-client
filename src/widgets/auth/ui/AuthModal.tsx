@@ -15,6 +15,12 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
   const [error, setError] = useState("");
   const dispatch = useDispatch();
 
+  const handleModalClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -45,7 +51,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <Modal>
+    <Modal onClick={handleModalClick}>
       <ModalContent>
         <h2>{isLogin ? "로그인" : "회원가입"}</h2>
         <Form onSubmit={handleSubmit}>
