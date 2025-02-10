@@ -14,8 +14,8 @@ const App = () => {
   useEffect(() => {
     const validateAuth = async () => {
       const userData = await authApi.validateToken();
-      if (userData) {
-        dispatch(setUser(userData));
+      if (userData && userData.user) {
+        dispatch(setUser(userData.user));
       }
     };
     validateAuth();
