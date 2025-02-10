@@ -17,6 +17,7 @@ export const GameLobby = () => {
       {user ? (
         <UserInfo>
           <UserName>{user.username}</UserName>
+
           <Stats>
             <StatItem>{user.total_games}게임</StatItem>
             <StatItem>{user.wins}승</StatItem>
