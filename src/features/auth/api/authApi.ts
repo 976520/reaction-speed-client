@@ -18,7 +18,7 @@ export const authApi = {
 
   login: async (username: string, password: string) => {
     try {
-      console.log(username, "로그인");
+      console.log("로그인 시도:", username);
 
       const response = await fetch(`${API_URL}/login/`, {
         method: "POST",
@@ -28,11 +28,12 @@ export const authApi = {
         body: JSON.stringify({ username, password }),
       });
 
+      console.log("응답 상태:", response.status);
       const data = await response.json();
-      console.log("로그인 응답:", data);
+      console.log("응답:", data);
 
       if (data.token) {
-        console.log(data.token);
+        console.log("토큰:", data.token);
         localStorage.setItem("token", data.token);
       } else {
         console.log("토큰 없음");
@@ -40,7 +41,7 @@ export const authApi = {
 
       return data;
     } catch (error) {
-      console.error(error);
+      console.error("로그인 에러:", error);
       throw error;
     }
   },
