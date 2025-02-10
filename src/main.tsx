@@ -18,8 +18,8 @@ const App = () => {
     const validateAuth = async () => {
       try {
         const userData = await authApi.validateToken();
-        if (userData.success && userData.data) {
-          dispatch(setUser(userData.data));
+        if (userData.success && userData.data?.user) {
+          dispatch(setUser(userData.data.user));
         }
       } finally {
         setIsLoading(false);
@@ -27,6 +27,10 @@ const App = () => {
     };
     validateAuth();
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   if (isLoading) {
     return <div>Loading...</div>;
