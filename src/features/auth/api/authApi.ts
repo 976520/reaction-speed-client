@@ -1,5 +1,5 @@
 import { ApiResponse, AuthResponse, UserDto } from "@/shared/types/api";
-import { AppDispatch, RootState } from "@/app/store";
+import { AppDispatch } from "@/app/store";
 import { AuthApi, LoginCredentials, RegisterCredentials } from "./types";
 
 import { logout as logoutAction } from "@/entities/auth";
@@ -16,7 +16,10 @@ interface FetchOptions extends RequestInit {
   body?: string;
 }
 
-async function fetchApi<T>(endpoint: string, options: FetchOptions): Promise<ApiResponse<T>> {
+async function fetchApi<T>(
+  endpoint: string,
+  options: FetchOptions
+): Promise<ApiResponse<T>> {
   try {
     const response = await fetch(`${API_URL}${endpoint}`, options);
     const data = await response.json();
@@ -27,13 +30,16 @@ async function fetchApi<T>(endpoint: string, options: FetchOptions): Promise<Api
 
     return { success: true, data };
   } catch (error) {
-    const message = error instanceof Error ? error.message : "서버 오류가 발생했습니다.";
+    const message =
+      error instanceof Error ? error.message : "서버 오류가 발생했습니다.";
     return { success: false, error: message };
   }
 }
 
 export const authApi: AuthApi = {
-  register: async (credentials: RegisterCredentials): Promise<ApiResponse<AuthResponse>> => {
+  register: async (
+    credentials: RegisterCredentials
+  ): Promise<ApiResponse<AuthResponse>> => {
     const response = await fetchApi<AuthResponse>("/register/", {
       method: "POST",
       headers: {
@@ -52,7 +58,9 @@ export const authApi: AuthApi = {
     return response;
   },
 
-  login: async (credentials: LoginCredentials): Promise<ApiResponse<AuthResponse>> => {
+  login: async (
+    credentials: LoginCredentials
+  ): Promise<ApiResponse<AuthResponse>> => {
     const response = await fetchApi<AuthResponse>("/login/", {
       method: "POST",
       headers: {
