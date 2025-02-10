@@ -3,7 +3,7 @@ import { resetGame, setGameState, setReactionTime, setStartTime } from "@/entiti
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "@/app/store";
-import { gameSocket } from "@/shared/api/gameSocket";
+import { gameSocket } from "@/shared/api/ws/WebSocketService";
 import { useEffect } from "react";
 
 export const GameRoom = () => {

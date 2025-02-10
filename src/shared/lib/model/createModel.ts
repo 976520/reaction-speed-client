@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-type Reducer<S> = (state: S, payload: any) => void;
-type Effect = (payload: any) => Promise<void>;
+type Reducer<S, P = any> = (state: S, payload: P) => void;
+type Effect<P = any> = (payload: P) => Promise<void>;
 
 interface ModelConfig<S> {
   state: S;

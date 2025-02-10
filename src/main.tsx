@@ -1,8 +1,8 @@
 import { StrictMode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { GamePage } from "@/pages/game/ui/GamePage";
 import { GlobalStyles } from "@/app/styles/GlobalStyles";
+import { MainPage } from "@/pages/game/ui/MainPage";
 import { Providers } from "@/app/providers";
 import { RootState } from "@/app/store";
 import { authApi } from "@/features/auth/api/authApi";
@@ -17,9 +17,9 @@ const App = () => {
   useEffect(() => {
     const validateAuth = async () => {
       try {
-        const userData = await authApi.validateToken();
-        if (userData.success && userData.data?.user) {
-          dispatch(setUser(userData.data.user));
+        const response = await authApi.validateToken();
+        if (response.success && response.data) {
+          dispatch(setUser(response.data));
         }
       } finally {
         setIsLoading(false);
@@ -39,7 +39,7 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <GamePage />
+      <MainPage />
     </>
   );
 };
