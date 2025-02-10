@@ -2,6 +2,7 @@ import { Button, ErrorMessage, Form, Input, Modal, ModalContent, ToggleButton } 
 
 import { authApi } from "@/features/auth/api/authApi";
 import { setUser } from "@/entities/auth";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -44,7 +45,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
         }
       }
     } catch (err) {
-      setError("서버 오류가 발생했습니다");
+      toast.error("서버 오류가 발생했습니다.");
     }
   };
 

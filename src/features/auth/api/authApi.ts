@@ -1,25 +1,33 @@
+import { toast } from "react-toastify";
+
 const API_URL = "http://127.0.0.1:8000/api";
 
 export const authApi = {
   register: async (username: string, password: string) => {
-    const response = await fetch(`${API_URL}/register/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await response.json();
-    if (data.token) {
-      localStorage.setItem("token", data.token);
+    try {
+      const response = await fetch(`${API_URL}/register/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        toast.success("회원가입이 완료되었습니다!");
+      } else {
+        toast.error(data.message || "회원가입에 실패했습니다.");
+      }
+      return data;
+    } catch (error) {
+      toast.error("서버 오류가 발생했습니다.");
+      throw error;
     }
-    return data;
   },
 
   login: async (username: string, password: string) => {
     try {
-      console.log("로그인 시도:", username);
-
       const response = await fetch(`${API_URL}/login/`, {
         method: "POST",
         headers: {
@@ -28,20 +36,18 @@ export const authApi = {
         body: JSON.stringify({ username, password }),
       });
 
-      console.log("응답 상태:", response.status);
       const data = await response.json();
-      console.log("응답:", data);
 
       if (data.token) {
-        console.log("토큰:", data.token);
         localStorage.setItem("token", data.token);
+        toast.success("로그인되었습니다!");
       } else {
-        console.log("토큰 없음");
+        toast.error(data.message || "로그인에 실패했습니다.");
       }
 
       return data;
     } catch (error) {
-      console.error("로그인 에러:", error);
+      toast.error("서버 오류가 발생했습니다.");
       throw error;
     }
   },
@@ -63,16 +69,19 @@ export const authApi = {
       });
       if (!response.ok) {
         localStorage.removeItem("token");
+        toast.error("인증이 만료되었습니다. 다시 로그인해주세요.");
         return null;
       }
       return response.json();
     } catch (error) {
       localStorage.removeItem("token");
+      toast.error("서버 오류가 발생했습니다.");
       return null;
     }
   },
 
   logout: () => {
     localStorage.removeItem("token");
+    toast.info("로그아웃되었습니다.");
   },
 };
