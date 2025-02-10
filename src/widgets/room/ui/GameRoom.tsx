@@ -1,5 +1,5 @@
 import { ExitButton, GameContainer, OpponentInfo, ReactionButton } from "./styled";
-import { resetGame, setGameState, setReactionTime, setStartTime } from "@/entities/game/model/slice";
+import { resetGame, setGameState, setReactionTime, setStartTime } from "@/entities/game";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "@/app/store";

@@ -1,6 +1,6 @@
 import { Container } from "./styled";
-import { GameLobby } from "@/widgets/game-lobby/ui/GameLobby";
-import { GameRoom } from "@/widgets/game-room/ui/GameRoom";
+import { GameLobby } from "@/widgets/lobby/ui/GameLobby";
+import { GameRoom } from "@/widgets/room/ui/GameRoom";
 import { RootState } from "@/app/store";
 import { useSelector } from "react-redux";
 
