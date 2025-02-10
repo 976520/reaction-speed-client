@@ -1,6 +1,8 @@
 import { ApiResponse, AuthResponse, UserDto } from "@/shared/types/api";
 import { AuthApi, LoginCredentials, RegisterCredentials } from "./types";
 
+import { logout as logoutAction } from "@/entities/auth";
+import { store } from "@/app/store";
 import { toast } from "react-toastify";
 
 const API_URL = "http://127.0.0.1:8000/api" as const;
@@ -93,6 +95,7 @@ export const authApi: AuthApi = {
 
   logout: (): void => {
     localStorage.removeItem("token");
+    store.dispatch(logoutAction());
     toast.info("로그아웃되었습니다.");
   },
 };
