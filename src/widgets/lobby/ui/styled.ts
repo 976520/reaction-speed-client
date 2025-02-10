@@ -40,10 +40,32 @@ export const OpponentInfo = styled.div`
 `;
 
 export const UserInfo = styled.div`
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.secondary};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.medium};
+  margin-bottom: ${({ theme }) => theme.spacing.large};
 `;
 
+export const UserName = styled.h3`
+  margin: 0;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
+export const Stats = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.medium};
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const StatItem = styled.span`
+  background: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  padding: ${({ theme }) => theme.spacing.small} ${({ theme }) => theme.spacing.medium};
+  border-radius: 20px;
+  font-size: 0.9rem;
+`;
 export const AuthButton = styled.button`
   padding: ${({ theme }) => theme.spacing.medium};
   background: ${({ theme }) => theme.colors.primary};
@@ -51,4 +73,25 @@ export const AuthButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.large};
+`;
+
+export const Button = styled.button`
+  padding: ${({ theme }) => theme.spacing.medium};
+  background: ${({ theme }) => theme.colors.primary};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
