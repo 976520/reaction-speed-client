@@ -1,7 +1,7 @@
 import { Button, ErrorMessage, Form, Input, Modal, ModalContent, ToggleButton } from "./styled";
-import { login, register } from "@/shared/api/authApi";
 
-import { setUser } from "@/entities/auth/model/slice";
+import { authApi } from "@/features/auth/api/authApi";
+import { setUser } from "@/entities/auth";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
@@ -27,7 +27,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
 
     try {
       if (isLogin) {
-        const data = await login(formData.get("username") as string, formData.get("password") as string);
+        const data = await authApi.login(formData.get("username") as string, formData.get("password") as string);
         if (data.user) {
           dispatch(setUser(data.user));
           onClose();
@@ -35,7 +35,7 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
           setError(data.message || "로그인 실패");
         }
       } else {
-        const data = await register(formData.get("username") as string, formData.get("password") as string);
+        const data = await authApi.register(formData.get("username") as string, formData.get("password") as string);
         if (data.user) {
           dispatch(setUser(data.user));
           onClose();

@@ -33,7 +33,7 @@ export const GameLobby = () => {
 
   return (
     <LobbyContainer>
-      <Title>반응속도 테스트</Title>
+      <Title></Title>
       {isAuthenticated ? (
         <UserInfo>
           {user?.username} ({user?.wins}승 / {user?.total_games}게임)
