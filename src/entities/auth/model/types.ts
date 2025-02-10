@@ -1,12 +1,10 @@
-export interface User {
-  id: number;
-  username: string;
-  total_games: number;
-  wins: number;
-  best_reaction_time: number | null;
-}
+import { UserDto } from "@/shared/types/api";
+
+export interface User extends UserDto {}
 
 export interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
+  loading: boolean;
+  error: string | null;
 }
