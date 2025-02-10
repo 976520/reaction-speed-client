@@ -1,6 +1,6 @@
-import { GameAction, SocketMessage } from "@/shared/types/socket";
-
 import { EventEmitter } from "@/shared/lib/events/EventEmitter";
+import { SocketMessage } from "@/shared/types/socket";
+import { WS_URL } from "@/shared/config/constants";
 
 export class WebSocketService extends EventEmitter {
   private socket: WebSocket | null = null;
@@ -113,4 +113,4 @@ export class WebSocketService extends EventEmitter {
   }
 }
 
-export const gameSocket = new WebSocketService("ws://127.0.0.1:8000/ws/game/");
+export const gameSocket = new WebSocketService(`${WS_URL}/game/`);

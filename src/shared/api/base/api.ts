@@ -1,6 +1,5 @@
+import { API_URL } from "@/shared/config/constants";
 import { ApiResponse } from "@/shared/types/api";
-
-export const API_URL = "http://127.0.0.1:8000/api" as const;
 
 type ApiMethod = "GET" | "POST" | "PUT" | "DELETE";
 
