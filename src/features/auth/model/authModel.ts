@@ -1,4 +1,4 @@
-import { AuthState, User } from "@/entities/auth/model/types";
+import { User } from "@/entities/auth/model/types";
 
 import { AuthApi } from "../api/types";
 import { authApi } from "../api/authApi";
@@ -50,7 +50,8 @@ export const authModel = createModel<AuthModelState>({
           toast.success("로그인되었습니다!");
         }
       } catch (error) {
-        const message = error instanceof Error ? error.message : "로그인에 실패했습니다.";
+        const message =
+          error instanceof Error ? error.message : "로그인에 실패했습니다.";
         dispatch.setError(message);
         toast.error(message);
       } finally {
