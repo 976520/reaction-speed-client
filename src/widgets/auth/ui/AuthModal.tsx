@@ -48,6 +48,11 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
     }
   };
 
+  const handleLogout = () => {
+    authApi.logout();
+    dispatch(setUser(null));
+  };
+
   if (!isOpen) return null;
 
   return (
