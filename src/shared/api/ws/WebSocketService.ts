@@ -33,10 +33,10 @@ export class WebSocketService extends EventEmitter {
       this.setupSocketListeners();
 
       await new Promise<void>((resolve, reject) => {
-        if (!this.socket) return reject(new Error("Socket not initialized"));
+        if (!this.socket) return reject(new Error("소켓이 초기화되지 않았습니다"));
 
         this.socket.onopen = () => resolve();
-        this.socket.onerror = () => reject(new Error("Connection failed"));
+        this.socket.onerror = () => reject(new Error("연결에 실패했습니다"));
       });
 
       this.reconnectAttempts = 0;
@@ -95,7 +95,7 @@ export class WebSocketService extends EventEmitter {
 
   send(message: Partial<SocketMessage>): void {
     if (!this.isConnected()) {
-      throw new Error("WebSocket is not connected");
+      throw new Error("웹소켓이 연결되어 있지 않습니다");
     }
     this.socket?.send(JSON.stringify(message));
   }

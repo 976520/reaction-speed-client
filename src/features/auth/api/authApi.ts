@@ -22,7 +22,7 @@ async function fetchApi<T>(endpoint: string, options: FetchOptions): Promise<Api
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || "API request failed");
+      throw new Error(data.message || "API 요청에 실패했습니다");
     }
 
     return { success: true, data };
